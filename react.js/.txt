@@ -1,0 +1,267 @@
+### 1. What is the difference between a functional component and a class component in React?
+
+**Answer:**
+Functional components are simpler and are defined as JavaScript functions. They can accept props and return JSX. With the introduction of hooks, functional components can also manage state and lifecycle events. Class components, on the other hand, are ES6 classes that extend React.Component. They have lifecycle methods, and state is managed using this.state and this.setState.
+
+### 2. What is the purpose of key in React?
+
+**Answer:**
+The key prop helps React identify which items have changed, are added, or are removed in a list. It provides a stable identity for each element, allowing React to optimize rendering and improve performance. Each key must be unique among its siblings.
+
+### 3. What are some common performance optimization techniques in React?
+
+**Answer:**
+Using React.memo: Prevents unnecessary re-renders for functional components.
+Code splitting: Using dynamic imports to load components only when needed.
+Use of useCallback and useMemo: Helps in memoizing functions and values to avoid recomputing them on every render.
+Avoiding unnecessary state updates: Ensure that state updates only occur when necessary.
+
+### 4. What are PropTypes and how do you use them?
+
+**Answer:**
+PropTypes is a library that provides runtime type-checking for React props. It helps in validating the types of props passed to a component, making the component more robust. You use it by importing PropTypes and defining the expected prop types like this:
+
+- Example
+import PropTypes from 'prop-types';
+
+const MyComponent = ({ name, age }) => {
+  // component logic
+};
+
+MyComponent.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number
+};
+
+### 5. Can you explain what a Higher-Order Component (HOC) is?
+
+**Answer:**
+A Higher-Order Component (HOC) is a design pattern in React that allows you to enhance a component by wrapping it with another component. This pattern enables you to reuse component logic, manage state, or handle side effects without modifying the original component directly.
+
+- Example
+const Layout = ({ children }) => {
+  return (
+    <div>
+      <main>{children}</main>
+    </div>
+  );
+};
+
+const App = () => {
+    return (
+      <Layout>
+        <p>This is the main content!</p>
+      </Layout>
+    );
+  };
+
+### 6. What is the virtual DOM and how does it work?
+
+**Answer:**
+The virtual DOM is a lightweight in-memory representation of the actual DOM. When a component's state or props change, React creates a new virtual DOM tree. It then compares this new tree with the previous one (a process called "reconciliation") to determine what has changed. React only updates the parts of the actual DOM that need to change, improving performance by minimizing direct manipulations of the DOM.
+
+### 7. What is the difference between controlled and uncontrolled components in React?
+
+**Answer:**
+Controlled components: The component's state is managed by React. Form data is handled through state, and the input fields’ values are controlled via value props.
+Uncontrolled components: The form data is handled by the DOM itself. You can use ref to access the input values directly. This approach is less predictable and not recommended for complex forms.
+
+### 8. What is the purpose of React.Fragment?
+
+**Answer:**
+React.Fragment is used to group multiple elements without adding extra nodes to the DOM. It helps avoid unnecessary wrapper elements, keeping the markup cleaner. You can use <Fragment> or the shorthand <>...</> syntax.
+
+### 9. How do you implement lazy loading in React?
+
+**Answer:**
+Lazy loading in React can be implemented using React.lazy and Suspense. React.lazy allows you to dynamically import components, while Suspense can display a fallback UI while the component is loading.
+
+### 10. What are React Hooks? Can you name a few commonly used hooks?
+
+**Answer:**
+React Hooks are functions that let you use state and other React features in functional components. They allow you to manage state, side effects, context, and more, making it easier to share logic between components without using class components.
+
+1. useState
+Purpose: To manage local state in a functional component.
+Usage: It returns a state variable and a function to update that state.
+
+2. useEffect
+Purpose: To perform side effects in functional components, such as data fetching, subscriptions, or manual DOM manipulations.
+Usage: It runs after the render and can be configured to run on specific state or prop changes
+
+3. useContext
+Purpose: To access context values created by React.createContext.
+Usage: It simplifies passing data through the component tree without prop drilling.
+
+4. useReducer
+Purpose: To manage complex state logic in a functional component. It's similar to Redux but local to the component.
+Usage: It returns the current state and a dispatch function to update the state based on actions.
+
+5. useMemo
+Purpose: To memoize expensive computations, preventing them from being recalculated on every render unless their dependencies change.
+Usage: Useful for performance optimization when rendering complex components or calculations.
+
+6. useCallback
+Purpose: To memoize callback functions, preventing them from being recreated on every render unless their dependencies change.
+Usage: Useful when passing functions to child components to prevent unnecessary re-renders.
+
+7. useRef
+Purpose: To create mutable object references that persist for the full lifetime of the component. It's often used to access DOM elements directly or to hold mutable values.
+Usage: Can be used for storing any mutable value without causing re-renders.
+
+8. useLayoutEffect
+Purpose: Similar to useEffect, but it runs synchronously after all DOM mutations. It’s useful for reading layout from the DOM and synchronously re-rendering.
+Usage: It can help to measure the DOM and apply updates before the browser has a chance to paint.
+
+9. useDebugValue
+Purpose: To display a label in React DevTools for custom hooks.
+Usage: It helps in debugging by providing useful information about the hook’s current state.
+
+### 11. What is reconciliation in react?
+
+**Answer:**
+React reconciliation is a process that updates the Document Object Model (DOM) to reflect changes in a React application's state or props
+
+### 12. What are components in React?
+
+**Answer:**
+Components are the building blocks of a React application. They can be either class components or functional components. Each component encapsulates its own logic and rendering, making it reusable throughout the application.
+
+### 13. What is the difference between state and props?
+
+**Answer:**
+1. Props: Short for properties, these are read-only attributes passed from parent to child components. They are immutable and used to pass data down the component tree.
+2. State: State is a local data storage that a component can manage. It can be changed and is used to control the component's behavior and rendering.
+
+
+### 14. Explain the lifecycle methods of a class component.
+
+**Answer:**
+1. componentDidMount: Invoked immediately after a component is mounted; ideal for making API calls.
+2. componentDidUpdate: Invoked immediately after updating occurs; useful for handling updates based on previous props or state.
+3. componentWillUnmount: Invoked immediately before a component is unmounted; used for cleanup (e.g., removing event listeners).
+
+
+### 15. What is JSX?
+
+**Answer:**
+JSX (JavaScript XML) is a syntax extension for JavaScript that resembles HTML. It allows developers to write HTML-like code within JavaScript, making it easier to create and visualize the structure of UI components. JSX gets transpiled to regular JavaScript by tools like Babel.
+
+### 16. What is the difference between interface and type in TypeScript?
+
+**Answer:**
+Interface: Primarily used to define the shape of an object. Interfaces can be extended using the extends keyword and are open to declaration merging.
+Type: More versatile, allowing the definition of primitives, unions, and tuples. Types cannot be merged like interfaces but can be composed.
+
+### 17. What is the difference between authentication and authorization?
+
+**Answer:**
+1. Authentication: The process of verifying the identity of a user, typically through credentials like a username and password.
+2. Authorization: The process of determining what an authenticated user is allowed to do, such as accessing certain resources or performing specific actions.
+
+
+### 18. What is the Real DOM?
+
+**Answer:**
+The Real DOM (Document Object Model) is the actual representation of the UI in the browser. Changes to the Real DOM are slow and costly because they involve direct manipulation of the UI, which can lead to performance issues, especially with frequent updates.
+
+### 19. What is React Router, and why is it used?
+
+**Answer:**
+React Router is a standard library for routing in React applications. It allows developers to create dynamic routing for their applications, enabling navigation between different views and handling the browser history.
+
+### 20.  What are some common authentication methods in web applications?
+
+**Answer:**
+JWT (JSON Web Tokens): A common method for securely transmitting information between parties as a JSON object.
+OAuth: A protocol for authorization that allows third-party services to exchange information without sharing passwords.
+Session-based authentication: Storing session information on the server and using cookies to track user sessions.
+
+### 21. How do you handle form validation in React?
+
+**Answer:**
+Controlled components: Validate inputs on change or on submit.
+Libraries: Use libraries like Formik or React Hook Form for more complex forms, which provide built-in validation and error handling.
+
+### 22. What is synthetic event in react?
+
+**Answer:**
+React, a synthetic event is a cross-browser wrapper around the browser's native event.
+
+### 23. What is pure compoent in react?
+
+**Answer:**
+A Pure Component in React is a component that only re-renders when its props or state change. It performs a shallow comparison of the current and next props and state to determine if the component needs to update, which can lead to performance optimizations.
+
+- Example
+import React from 'react';
+const MyFunctionalComponent = React.memo(({ value }) => {
+  console.log('Rendering MyFunctionalComponent');
+  return <div>{value}</div>;
+});
+
+### 24. Can we have differentiate between redux vs context api?
+
+**Answer:**
+Both Redux and the Context API are tools for managing state in React applications, but they serve different purposes and have different use cases. Here’s a breakdown of their key differences:
+
+- Redux:
+Designed for complex applications with large state management needs.
+Best suited for scenarios where you have a lot of shared state that needs to be accessed and updated from different parts of the app.
+Provides a predictable state container, making it easier to manage and debug state changes.
+
+- Context API:
+Primarily used for passing data through the component tree without having to pass props down manually at every level.
+Great for simpler applications or for sharing global state (like themes or user authentication) across a few components.
+Less overhead than Redux, making it easier for small to medium-sized applications.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Redux Interview Questions **
+
+### 1. What is Redux, and why would you use it?
+
+**Answer:**
+Redux is a state management library for JavaScript applications, commonly used with React. It provides a predictable state container, allowing you to manage the application state globally. You would use Redux to simplify state management, especially in large applications where prop drilling can become cumbersome.
+
+### 2. What are actions in Redux?
+
+**Answer:**
+Actions are plain JavaScript objects that describe an event that has occurred in the application. Each action must have a type property, and can optionally contain additional data (payload) to provide more context. Actions are dispatched to trigger state changes in the store.
+
+### 3. What are reducers in Redux?
+
+**Answer:**
+Reducers are pure functions that take the current state and an action as arguments and return a new state. They specify how the state changes in response to actions. Reducers must not mutate the existing state but should create a new object to represent the updated state.
+
+### 4. What is the Redux store, and how do you create it?
+
+**Answer:**
+The Redux store is an object that holds the application state. It is created using the createStore function from Redux, which takes a reducer as its argument and optionally middleware.
+
+### 5. What is the purpose of the Provider component in Redux?
+
+**Answer:**
+The Provider component is a React component that makes the Redux store available to all nested components. It wraps your main application component and passes the store to the context, allowing any connected components to access the store.
+
+### 6. What is the difference between action creators and reducers?
+
+**Answer:**
+Action Creators: Functions that return action objects. They encapsulate the logic of creating actions, often including any necessary payload data. Action creators can also be asynchronous when used with middleware like redux-thunk.
+
+Reducers: Functions that take the current state and an action as arguments and return a new state. They determine how the state changes in response to the dispatched actions
+
+### 7. What is the role of the Redux DevTools?
+
+**Answer:**
+Redux DevTools is a browser extension that provides a powerful interface for debugging Redux applications. It allows you to inspect every action and state change, revert to previous states, and even time travel through state changes. It can help in understanding how actions affect the state and in identifying bugs.
+
+### 8. Can you explain the combineReducers function in Redux?
+
+**Answer:**
+The combineReducers function is used to combine multiple reducers into a single reducing function. Each reducer is responsible for a specific slice of the state, and combineReducers creates a root reducer that can manage the overall state. The state tree will have a structure based on the keys provided to combineReducers
+
+### 9. How do you handle asynchronous actions with Redux Toolkit?
+
+**Answer:**
+You can handle asynchronous actions using createAsyncThunk, which allows you to define async actions easily. It automatically generates action types and reducers for the pending, fulfilled, and rejected states.

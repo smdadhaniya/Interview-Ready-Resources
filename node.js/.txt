@@ -1,0 +1,165 @@
+### 1. What is Node.js and why is it used?
+Node.js is a runtime environment that allows you to run JavaScript on the server side. It's built on Chrome's V8 engine and is designed for scalable network applications, ideal for I/O-intensive tasks.
+
+### 2. What is Express.js, and how does it simplify Node.js development?
+Express.js is a minimal web framework for Node.js that provides features for building web applications, simplifying routing, middleware integration, and handling HTTP requests.
+
+### 3. What is REPL in Node.js?
+REPL stands for Read-Eval-Print Loop. It is an interactive programming environment in Node.js that allows you to execute JavaScript code snippets in real-time.
+
+**Key Features:**
+- **Read:** Takes user input.
+- **Eval:** Executes the input as JavaScript code.
+- **Print:** Displays the result of the evaluation.
+- **Loop:** Repeats the process until the user exits.
+
+### 4. Can you explain the concept of middleware in Express.js?
+Middleware functions execute during the request-response cycle, allowing actions like logging, authentication, and modifying requests/responses. Common middleware includes body-parser, cors, morgan, helmet, and express-session.
+
+### 5. How do you manage packages in a Node.js application?
+Packages are managed using npm or yarn. You can initialize a project with `npm init` and install packages using `npm install <package-name>`.
+
+### 6. What are Promises and how do they work in Node.js?
+Promises are a way to handle asynchronous operations more elegantly than traditional callbacks. They represent a value that may be available now, or in the future, or never. 
+
+A Promise can be in one of three states:
+1. **Pending**: The initial state, neither fulfilled nor rejected.
+2. **Fulfilled**: The operation completed successfully.
+3. **Rejected**: The operation failed.
+
+### 7. How do you handle asynchronous programming in Node.js?
+Asynchronous programming in Node.js is essential for building efficient applications that can handle multiple operations concurrently. Here are several key techniques and patterns used to manage asynchronous code effectively:
+
+1. **Callbacks**
+The most basic method of handling asynchronous operations is using callbacks. A function is passed as an argument to another function and is executed once the asynchronous operation completes.
+
+- Example: 
+fs.readFile('file.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log(data);
+});
+
+2. **Promises**
+As discussed earlier, Promises provide a cleaner way to work with asynchronous operations by allowing you to handle results and errors more elegantly.
+
+- Example: 
+const readFilePromise = fs.promises.readFile('file.txt', 'utf8');
+readFilePromise
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => {
+        console.error(err);
+    });
+
+3. Async/Await
+Introduced in ECMAScript 2017, async and await make it easier to work with Promises by allowing you to write asynchronous code that looks synchronous. You declare a function as async and use await to pause execution until the Promise is resolved.
+
+- Example: 
+const fs = require('fs').promises;
+async function readFile() {
+    try {
+        const data = await fs.readFile('file.txt', 'utf8');
+        console.log(data);
+    } catch (err) {
+        console.error(err);
+    }
+}
+readFile();
+
+### 8. What is stream in Node.js?
+Streams are data-handling methods used to read or write input/output sequentially. There are four types of streams:
+1. **Writable:** Streams to which we can write data (e.g., `fs.createWriteStream()`).
+2. **Readable:** Streams from which data can be read (e.g., `fs.createReadStream()`).
+3. **Duplex:** Streams that are both readable and writable (e.g., `net.Socket`).
+4. **Transform:** Streams that can modify or transform the data as it is read/written.
+
+### 9. What are `setInterval`, `setTimeout`, `setImmediate`, and `process.nextTick()` in Node.js?
+- **setInterval:** Executes a function repeatedly at specified intervals.
+- **setTimeout:** Executes a function after a specified delay, only once.
+- **setImmediate:** Executes a function on the next iteration of the event loop.
+- **process.nextTick:** Executes a function in the same phase of the event loop, before any I/O operations.
+
+### 10. Explain how you implement user authentication and authorization in a Node.js application.
+Authentication is often handled using JWTs (JSON Web Tokens), where a token is generated upon login and validated for protected routes, along with password hashing for security.
+
+### 11. How does "Control Flow" control function calls?
+Control flow determines the order of execution in programming. By controlling the flow, you can create complex logic and manage the sequence of function calls.
+
+### 12. What is callback hell?
+Callback hell, or the "Pyramid of Doom," occurs in asynchronous programming when multiple nested callbacks make the code difficult to read and maintain.
+
+1. Why Does Callback Hell Occur?
+- Asynchronous Nature: JavaScript is single-threaded, and many I/O operations (like network requests or file reading) are non-blocking, requiring callbacks to handle their results.
+- Dependent Operations: Often, the result of one asynchronous operation is needed for the next, leading to nested callbacks.
+- Poor Readability: As the number of nested callbacks increases, the code becomes harder to follow and maintain, making debugging difficult.
+
+2. When to Use Callbacks
+- While callback hell is often to be avoided, callbacks can still be appropriate in certain scenarios:
+- Simple Tasks: For small, simple asynchronous tasks that do not require chaining, callbacks can be a straightforward solution.
+- Event Handling: When handling events (like button clicks), callbacks can be useful and are less likely to lead to nesting issues.
+
+- Example: 
+firstFunction(() => {
+    secondFunction(() => {
+        thirdFunction(() => {
+            console.log("All functions complete");
+        });
+    });
+});
+
+### 13. What are some best practices for securing a Node.js application?
+- Validate and sanitize user input.
+- Use HTTPS for data encryption.
+- Implement authentication and authorization mechanisms (e.g., OAuth, JWT).
+- Limit access to sensitive data.
+- Regularly update dependencies.
+
+### 14. What are `Events`, `EventEmitter`, `Event Queue`, `Event Loop` and `Event Driven` in Node.js?
+1. Events are actions or occurrences in a Node.js application (e.g., file reads, HTTP requests). They allow Node.js to handle asynchronous operations efficiently.
+
+2. EventEmitter is a Node.js class that lets you create, emit, and listen to events. You can define custom events and attach listeners (functions) that respond when these events occur.
+
+- Example: 
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+emitter.on('event', () => console.log('Event triggered!'));
+emitter.emit('event');
+
+3. The Event Queue holds asynchronous tasks (like I/O operations) that are ready to be processed. Node.js processes these tasks asynchronously, ensuring the main thread isn't blocked.
+
+4. The Event Loop is the core of Node.js's asynchronous behavior. It continuously checks the Event Queue and executes tasks (callbacks) one by one. This non-blocking, single-threaded approach enables Node.js to handle many operations efficiently.
+
+- Example: 
+setTimeout(() => console.log('Timeout done'), 0);
+console.log('Start');
+// Output: Start, then Timeout done
+
+5. Event-driven programming is used to synchronize the occurrence of multiple events and to make the program as simple as possible.
+
+- Example: 
+const server = http.createServer((req, res) => res.end('Hello!'));
+server.listen(3000, () => console.log('Server running'));
+
+
+### 15. What are Buffers in Node.js?
+Buffers are used to handle binary data directly. They are essential for tasks like image processing or file uploads and are integral to working with streams.
+
+** Key Features of Buffers **
+- Fixed Size: Once a Buffer is created, its size cannot be changed.
+- Raw Binary Data: Buffers can store raw binary data, making them suitable for binary data manipulation.
+- Encoding Support: Buffers support various encodings (like UTF-8, ASCII, etc.) for string conversions.
+- Efficient Memory Management: Buffers provide a way to handle memory efficiently, as they allocate memory outside of the V8 heap.
+
+## 16. What is single-thread in nodejs?
+Node.js is single-threaded, meaning it executes all JavaScript code on a single thread in its runtime. Unlike languages like Java or Python, which can create multiple threads for concurrent tasks, Node.js operates on a single thread to handle all incoming requests. However, it achieves high concurrency by delegating heavy I/O tasks (like reading from files or databases) to system threads managed by the operating system.
+
+## 17. How can you handle multiple requests at a time as NodeJS is single-threaded?
+While Node.js is single-threaded for executing JavaScript code, it uses multiple threads under the hood for handling certain tasks. Node.js uses a thread pool (through the libuv library) for handling asynchronous I/O operations, like file system access or DNS resolution. These threads allow Node.js to efficiently handle I/O without blocking the main event loop.
+
+## 18. What is thread in nodejs?
+a lightweight unit of processing that executes JavaScript code within a process
