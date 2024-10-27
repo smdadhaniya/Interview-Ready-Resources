@@ -1,0 +1,106 @@
+### 1. What is the difference between == and === in JavaScript?
+
+**Answer:**
+The == operator is the equality operator that performs type coercion, meaning it converts the operands to the same type before making the comparison. For example:
+
+```javascript
+console.log(5 == '5'); 
+```
+
+On the other hand, === is the strict equality operator that checks both value and type without coercion. For example:
+
+```javascript
+console.log(5 === '5'); 
+```
+
+### 2. Explain closures in JavaScript.
+
+**Answer:**
+A closure is a function that retains access to its lexical scope, even when the function is executed outside that scope. This means a closure can "remember" the environment in which it was created.
+
+Here's an example:
+
+```javascript
+function outerFunction() {
+    let outerVariable = 'I am outside!';
+    
+    function innerFunction() {
+        console.log(outerVariable); 
+    }
+    
+    return innerFunction;
+}
+
+const myClosure = outerFunction();
+myClosure(); /
+```
+
+### 3. What is the purpose of this in JavaScript?
+
+**Answer:**
+In JavaScript, this refers to the context in which a function is executed. Its value can vary based on how a function is called:
+
+1. **Global Context**: In the global execution context outside of any function, this refers to the global object (window in browsers).
+   
+2. **Object Method**: When a function is called as a method of an object, this refers to that object.
+   
+3. **Constructor Functions**: In constructor functions invoked with new, this refers to the newly created object.
+
+4. **Event Handlers**: In event handlers, this refers to the element that fired the event.
+
+5. **Arrow Functions**: In arrow functions, this lexically binds to the context in which the function was defined.
+
+### 4. What are promises, and how do they work?
+
+**Answer:**
+Promises are objects that represent the eventual completion (or failure) of an asynchronous operation and its resulting value. A promise can be in one of three states: pending, fulfilled, or rejected.
+
+Here's how you can create and use a promise:
+
+```javascript
+let myPromise = new Promise((resolve, reject) => {
+    let success = true; // Simulating success or failure
+
+    if (success) {
+        resolve("Operation was successful!");
+    } else {
+        reject("Operation failed!");
+    }
+});
+
+myPromise
+    .then(result => console.log(result)) // Handles success
+    .catch(error => console.error(error)); // Handles failure
+```
+
+### 5. What are async/await, and how do they relate to promises?
+
+**Answer:**
+async/await is a syntactic sugar built on top of promises that allows for writing asynchronous code in a more synchronous manner. An async function always returns a promise, and the await keyword can be used inside an async function to pause execution until the promise resolves.
+
+Example:
+
+```javascript
+async function fetchData() {
+    try {
+        let response = await fetch('https://api.example.com/data');
+        let data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+fetchData();
+```
+
+### 6.What is hosting in js with example
+
+**Answer:**
+Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase. This means that you can use variables and functions before they are actually declared in the code.
+
+```javascript
+console.log(myVar); // Output: undefined
+var myVar = 5;
+console.log(myVar); // Output: 5
+````

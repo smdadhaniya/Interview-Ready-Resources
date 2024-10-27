@@ -63,8 +63,9 @@ The virtual DOM is a lightweight in-memory representation of the actual DOM. Whe
 ### 7. What is the difference between controlled and uncontrolled components in React?
 
 **Answer:**
-Controlled components: The component's state is managed by React. Form data is handled through state, and the input fields’ values are controlled via value props.
-Uncontrolled components: The form data is handled by the DOM itself. You can use ref to access the input values directly. This approach is less predictable and not recommended for complex forms.
+1. Controlled components: The component's state is managed by React. Form data is handled through state, and the input fields’ values are controlled via value props.
+
+2. Uncontrolled components: The form data is handled by the DOM itself. You can use ref to access the input values directly. This approach is less predictable and not recommended for complex forms.
 
 ### 8. What is the purpose of React.Fragment?
 
@@ -150,13 +151,15 @@ JSX (JavaScript XML) is a syntax extension for JavaScript that resembles HTML. I
 ### 16. What is the difference between interface and type in TypeScript?
 
 **Answer:**
-Interface: Primarily used to define the shape of an object. Interfaces can be extended using the extends keyword and are open to declaration merging.
-Type: More versatile, allowing the definition of primitives, unions, and tuples. Types cannot be merged like interfaces but can be composed.
+1. Interface: Primarily used to define the shape of an object. Interfaces can be extended using the extends keyword and are open to declaration merging.
+
+2. Type: More versatile, allowing the definition of primitives, unions, and tuples. Types cannot be merged like interfaces but can be composed.
 
 ### 17. What is the difference between authentication and authorization?
 
 **Answer:**
 1. Authentication: The process of verifying the identity of a user, typically through credentials like a username and password.
+
 2. Authorization: The process of determining what an authenticated user is allowed to do, such as accessing certain resources or performing specific actions.
 
 
@@ -200,7 +203,7 @@ const MyFunctionalComponent = React.memo(({ value }) => {
   return <div>{value}</div>;
 });
 
-### 24. Can we have differentiate between redux vs context api?
+### 24. Can we have differentiate between Redux vs Context API?
 
 **Answer:**
 Both Redux and the Context API are tools for managing state in React applications, but they serve different purposes and have different use cases. Here’s a breakdown of their key differences:
@@ -215,9 +218,7 @@ Primarily used for passing data through the component tree without having to pas
 Great for simpler applications or for sharing global state (like themes or user authentication) across a few components.
 Less overhead than Redux, making it easier for small to medium-sized applications.
 
----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-** Redux Interview Questions **
+## Redux Interview Questions ##
 
 ### 1. What is Redux, and why would you use it?
 

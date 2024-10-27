@@ -32,7 +32,7 @@ A document in MongoDB is a basic unit of data that is stored in BSON (Binary JSO
 - **Geospatial Index:** Used for querying geospatial data.
 - **Wildcard Index:** Allows indexing of fields that may vary in structure.
 
-### 6. Can you explain the difference between `find()` and `findOne()`?
+### 6. Can you explain the difference between find() and findOne()?
 
 **Answer:**  
 `find()` retrieves all documents that match the specified query and returns a cursor to the results, allowing for iteration through multiple documents. `findOne()`, on the other hand, returns the first document that matches the query, making it more efficient when you only need a single document.
@@ -124,10 +124,10 @@ A shard key is a field or combination of fields that determines how data is part
 - **Query Performance:** Queries that include the shard key can be routed directly to the appropriate shard, improving performance.
 Choosing a shard key that supports your application’s access patterns is essential for optimal performance and scalability.
 
-### 19. What is the purpose of the `$lookup` stage in the aggregation framework?
+### 19. What is the purpose of the $lookup stage in the aggregation framework?
 
 **Answer:**  
-The `$lookup` stage allows you to perform a left outer join to an unsharded collection in the same database. It enables you to combine documents from two collections based on a specified condition. This is useful for retrieving related data from different collections without having to perform multiple queries, thereby simplifying data retrieval and enhancing performance.
+The $lookup stage allows you to perform a left outer join to an unsharded collection in the same database. It enables you to combine documents from two collections based on a specified condition. This is useful for retrieving related data from different collections without having to perform multiple queries, thereby simplifying data retrieval and enhancing performance.
 
 ### 20. How do you monitor MongoDB performance?
 
