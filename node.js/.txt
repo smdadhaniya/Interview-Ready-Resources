@@ -1,3 +1,8 @@
+https://gist.github.com/paulfranco/9f88a2879b7b7d88de5d1921aef2093b
+https://www.fullstack.cafe/blog/node-js-interview-questions
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
 ### 1. What is Node.js and why is it used?
 Node.js is a runtime environment that allows you to run JavaScript on the server side. It's built on Chrome's V8 engine and is designed for scalable network applications, ideal for I/O-intensive tasks.
 
@@ -84,7 +89,22 @@ Streams are data-handling methods used to read or write input/output sequentiall
 - **process.nextTick:** Executes a function in the same phase of the event loop, before any I/O operations.
 
 ### 10. Explain how you implement user authentication and authorization in a Node.js application.
-Authentication is often handled using JWTs (JSON Web Tokens), where a token is generated upon login and validated for protected routes, along with password hashing for security.
+
+1. **User Registration**: Start by creating a registration endpoint where users can sign up. During this process, collect their credentials (like username and password). Use a strong hashing algorithm (e.g., bcrypt) to hash passwords before storing them in the database for security.
+
+2. **User Login**: Create a login endpoint that allows users to authenticate. When users provide their credentials, compare the entered password (after hashing) with the stored hashed password to verify their identity.
+
+3. **Session Management**: Decide between session-based authentication and token-based authentication (e.g., JSON Web Tokens, or JWTs). Session-based auth involves storing session data on the server, while JWTs allow for stateless authentication, where the token contains user information.
+
+4. **Token Generation**: If using JWTs, generate a token upon successful login. This token should include user information (like user ID and roles) and be signed to prevent tampering. The client will store this token (often in local storage or a cookie) and send it with subsequent requests.
+
+5. **Middleware for Authorization**: Implement middleware to protect routes. This middleware checks for the presence of a valid token or session before granting access to protected resources. If the token is invalid or expired, respond with an error.
+
+6. **Role-Based Access Control (RBAC)**: Define roles (e.g., admin, user) and permissions. Assign roles to users during registration or management, and include logic in your middleware to enforce access controls based on user roles.
+
+7. **Logging and Monitoring**: Integrate logging to track authentication attempts, including successful logins and access to protected routes. This helps in identifying potential security threats.
+
+8. **Security Best Practices**: Follow best practices such as implementing rate limiting on login attempts, securing sensitive endpoints, enabling HTTPS, and ensuring proper cookie settings if using session-based authentication.
 
 ### 11. How does "Control Flow" control function calls?
 Control flow determines the order of execution in programming. By controlling the flow, you can create complex logic and manage the sequence of function calls.
@@ -134,6 +154,25 @@ emitter.emit('event');
 
 4. The Event Loop is the core of Node.js's asynchronous behavior. It continuously checks the Event Queue and executes tasks (callbacks) one by one. This non-blocking, single-threaded approach enables Node.js to handle many operations efficiently.
 
+┌───────────────────────────┐
+┌─>│           timers          │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │     pending callbacks     │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │       idle, prepare       │
+│  └─────────────┬─────────────┘      ┌───────────────┐
+│  ┌─────────────┴─────────────┐      │   incoming:   │
+│  │           poll            │<─────┤  connections, │
+│  └─────────────┬─────────────┘      │   data, etc.  │
+│  ┌─────────────┴─────────────┐      └───────────────┘
+│  │           check           │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+└──┤      close callbacks      │
+   └───────────────────────────┘
+
 - Example: 
 setTimeout(() => console.log('Timeout done'), 0);
 console.log('Start');
@@ -155,11 +194,69 @@ Buffers are used to handle binary data directly. They are essential for tasks li
 - Encoding Support: Buffers support various encodings (like UTF-8, ASCII, etc.) for string conversions.
 - Efficient Memory Management: Buffers provide a way to handle memory efficiently, as they allocate memory outside of the V8 heap.
 
-## 16. What is single-thread in nodejs?
+### 16. What is single-thread in nodejs?
 Node.js is single-threaded, meaning it executes all JavaScript code on a single thread in its runtime. Unlike languages like Java or Python, which can create multiple threads for concurrent tasks, Node.js operates on a single thread to handle all incoming requests. However, it achieves high concurrency by delegating heavy I/O tasks (like reading from files or databases) to system threads managed by the operating system.
 
-## 17. How can you handle multiple requests at a time as NodeJS is single-threaded?
+### 17. How can you handle multiple requests at a time as NodeJS is single-threaded?
 While Node.js is single-threaded for executing JavaScript code, it uses multiple threads under the hood for handling certain tasks. Node.js uses a thread pool (through the libuv library) for handling asynchronous I/O operations, like file system access or DNS resolution. These threads allow Node.js to efficiently handle I/O without blocking the main event loop.
 
-## 18. What is thread in nodejs?
+### 18. What is thread in nodejs?
 a lightweight unit of processing that executes JavaScript code within a process
+
+
+### 19. What are the differences between npm, Yarn, and pnpm? Could you explain their unique features and use cases?
+
+### npm (Node Package Manager)
+
+**Overview**: npm is the default package manager for Node.js, and it's included with Node.js installations.
+
+**Unique Features**:
+- **Simplicity**: Easy to use for beginners, with a straightforward command-line interface.
+- **Registry**: Access to the extensive npm registry, which hosts a vast number of packages.
+- **Scripts**: Built-in support for running scripts defined in the `package.json` file.
+- **Lock File**: Introduced `package-lock.json` to ensure consistent installations across environments.
+
+**Use Cases**:
+- Great for small to medium-sized projects or when using Node.js packages in general.
+- Best suited for developers looking for a simple, widely adopted package manager.
+
+### Yarn
+
+**Overview**: Developed by Facebook, Yarn was created to address some of the shortcomings of npm, particularly regarding speed and reliability.
+
+**Unique Features**:
+- **Performance**: Faster installations due to caching and parallel downloads.
+- **Deterministic Installs**: Uses `yarn.lock` to ensure consistent installations across different environments.
+- **Workspaces**: Supports managing multiple packages within a single repository, making it ideal for monorepos.
+- **Offline Mode**: Can install packages without an internet connection if they were previously installed.
+
+**Use Cases**:
+- Ideal for large projects or monorepos where speed and consistency are critical.
+- Suitable for teams that need better dependency management and faster installation times.
+
+### pnpm (Performant npm)
+
+**Overview**: pnpm is designed to be fast and efficient in how it handles package installations, especially with larger projects.
+
+**Unique Features**:
+- **Efficient Storage**: Uses a content-addressable file system to save disk space by storing only a single copy of each package version.
+- **Strict Dependency Resolution**: Ensures that packages can only access their declared dependencies, which can help prevent bugs caused by relying on incorrect versions.
+- **Performance**: Very fast installations thanks to the caching mechanism and symlinked dependencies.
+
+**Use Cases**:
+- Best for projects with many dependencies, as it saves disk space and improves installation speed.
+- Suitable for teams that need strict control over dependency resolutions and want to optimize performance.
+
+### Summary
+- **npm**: Best for beginners and straight forward projects; widely supported and easy to use.
+- **Yarn**: Offers improved speed and better dependency management, making it suitable for larger projects and monorepos.
+- **pnpm**: Focuses on efficiency and performance, ideal for projects with many dependencies or when disk space is a concern.
+
+### 20. What is libuv in node js
+Libuv is a C library used in Node.js that facilitates non-blocking I/O operations. It provides a consistent interface for asynchronous I/O across different platforms and supports various services like file system operations, DNS, networking, and more. Originally developed for Node.js, libuv has become essential for enabling asynchronous programming in server-side applications.
+
+### 21. Is Node a single threaded application? 
+Yes! Node uses a single threaded model with event looping.
+
+### 22. Explain usage of NODE_ENV
+Node encourages the convention of using a variable called NODE_ENV to flag whether we’re in production right now. This determination allows components to provide better diagnostics during development, for example by disabling caching or emitting verbose log statements. Setting NODE_ENV to production makes your application 3 times faster.
